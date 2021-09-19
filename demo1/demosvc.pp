@@ -1,0 +1,3 @@
+service { "ntp":
+  ensure    => "running",
+}

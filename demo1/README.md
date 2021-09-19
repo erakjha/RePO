@@ -105,3 +105,37 @@ $
 
 
 ```
+
+## demofile add content to the file
+
+```shell
+$ puppet parser validate demofile.pp 
+$ puppet apply demofile.pp --noop 
+Notice: Compiled catalog for puppetselfcontained.example.com in environment production in 0.01 seconds
+Notice: /Stage[main]/Main/File[/var/tmp/secretfile]/content: current_value '{sha256}e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855', should be '{sha256}6d2655f562a3e5877a6437d949f58d14778dde57c4553cc659b3a4798cf224fd' (noop)
+Notice: Class[Main]: Would have triggered 'refresh' from 1 event
+Notice: Stage[main]: Would have triggered 'refresh' from 1 event
+Notice: Applied catalog in 0.02 seconds
+$ cat /var/tmp/secretfile 
+$ ls -rlth /var/tmp/secretfile
+-r--------. 1 kunaljha5 kunaljha5 0 Sep 19 19:26 /var/tmp/secretfile
+$ date
+Sun Sep 19 19:30:36 UTC 2021
+$ puppet apply demofile.pp 
+Notice: Compiled catalog for puppetselfcontained.example.com in environment production in 0.01 seconds
+Notice: /Stage[main]/Main/File[/var/tmp/secretfile]/content: content changed '{sha256}e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855' to '{sha256}6d2655f562a3e5877a6437d949f58d14778dde57c4553cc659b3a4798cf224fd'
+Notice: Applied catalog in 0.02 seconds
+$ ls -rlth /var/tmp/secretfile
+-r--------. 1 kunaljha5 kunaljha5 47 Sep 19 19:30 /var/tmp/secretfile
+$ cat /var/tmp/secretfile
+Hello Martha Stuart, Max's Home-Made Cup Cakes.$ 
+$ 
+$ puppet apply demofile.pp 
+Notice: Compiled catalog for puppetselfcontained.example.com in environment production in 0.01 seconds
+Notice: Applied catalog in 0.01 seconds
+$ date
+Sun Sep 19 19:31:02 UTC 2021
+$ 
+
+
+```
