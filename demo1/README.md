@@ -51,3 +51,22 @@ Notice: Applied catalog in 0.02 seconds
 $
 
 ```
+
+## Validate-Test-Run with uid-shell change
+```shell
+$ cat demouser_with_uid_shell.pp 
+user { "kunaljha5":
+  ensure => "present",
+  uid    => "7777",
+  shell  => "/bin/sh",
+}
+$ puppet parser validate demouser_with_uid_shell.pp 
+$ puppet apply demouser_with_uid_shell.pp --noop 
+Notice: Compiled catalog for puppetselfcontained.example.com in environment production in 0.01 seconds
+Notice: /Stage[main]/Main/User[kunaljha5]/uid: current_value 1001, should be 7777 (noop)
+Notice: /Stage[main]/Main/User[kunaljha5]/shell: current_value '/bin/bash', should be '/bin/sh' (noop)
+Notice: Class[Main]: Would have triggered 'refresh' from 2 events
+Notice: Stage[main]: Would have triggered 'refresh' from 1 event
+Notice: Applied catalog in 0.02 seconds
+$
+```
