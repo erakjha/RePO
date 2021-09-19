@@ -52,7 +52,7 @@ $
 
 ```
 
-## Validate-Test-Run with uid-shell change
+## Validate-Test-Run-ReRun with uid-shell change
 ```shell
 $ cat demouser_with_uid_shell.pp 
 user { "kunaljha5":
@@ -69,4 +69,18 @@ Notice: Class[Main]: Would have triggered 'refresh' from 2 events
 Notice: Stage[main]: Would have triggered 'refresh' from 1 event
 Notice: Applied catalog in 0.02 seconds
 $
+$ puppet apply demouser_with_uid_shell.pp
+Notice: Compiled catalog for puppetselfcontained.example.com in environment production in 0.01 seconds
+Notice: /Stage[main]/Main/User[kunaljha5]/uid: uid changed 1001 to 7777
+Notice: /Stage[main]/Main/User[kunaljha5]/shell: shell changed '/bin/bash' to '/bin/sh'
+Notice: Applied catalog in 0.09 seconds
+$ cat /etc/passwd| grep kunal
+kunaljha5:x:7777:1001::/home/kunaljha5:/bin/sh
+$ 
+$ puppet apply demouser_with_uid_shell.pp
+Notice: Compiled catalog for puppetselfcontained.example.com in environment production in 0.01 seconds
+Notice: Applied catalog in 0.02 seconds
+$ 
+
+
 ```
