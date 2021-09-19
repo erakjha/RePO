@@ -84,3 +84,24 @@ $
 
 
 ```
+
+
+## demofile 
+```shell
+$ puppet parser validate demofile.pp 
+$ puppet apply demofile.pp --noop 
+Notice: Compiled catalog for puppetselfcontained.example.com in environment production in 0.01 seconds
+Notice: /Stage[main]/Main/File[/var/tmp/secretfile]/ensure: current_value 'absent', should be 'present' (noop)
+Notice: Class[Main]: Would have triggered 'refresh' from 1 event
+Notice: Stage[main]: Would have triggered 'refresh' from 1 event
+Notice: Applied catalog in 0.01 seconds
+$ puppet apply demofile.pp 
+Notice: Compiled catalog for puppetselfcontained.example.com in environment production in 0.01 seconds
+Notice: /Stage[main]/Main/File[/var/tmp/secretfile]/ensure: created
+Notice: Applied catalog in 0.02 seconds
+$ ls  -lrth /var/tmp/secretfile 
+-r--------. 1 kunaljha5 kunaljha5 0 Sep 19 19:26 /var/tmp/secretfile
+$ 
+
+
+```
